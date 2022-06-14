@@ -3,6 +3,8 @@
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PjController;
+use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\TransaksiKeluarController;
 use App\Http\Controllers\TransaksiMasukController;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +29,24 @@ Auth::routes();
 
 Route::group(['prefix'  => '/operator'],function(){
     Route::get('/dashboard',[BarangController::class, 'dashboard'])->name('operator.dashboard');
+});
+
+Route::group(['prefix'  => 'manajemen_data_penanggung_jawab_ruang/'],function(){
+    Route::get('/',[PjController::class, 'index'])->name('pj');
+    Route::get('/add',[PjController::class, 'add'])->name('pj.add');
+    Route::post('/post',[PjController::class, 'post'])->name('pj.post');
+    Route::get('{id}/edit',[PjController::class, 'edit'])->name('pj.edit');
+    Route::patch('update/{id}',[PjController::class, 'update'])->name('pj.update');
+    Route::delete('/delete/{id}',[PjController::class, 'delete'])->name('pj.delete');
+});
+
+Route::group(['prefix'  => 'manajemen_data_ruangan/'],function(){
+    Route::get('/',[RuanganController::class, 'index'])->name('ruangan');
+    Route::get('/add',[RuanganController::class, 'add'])->name('ruangan.add');
+    Route::post('/post',[RuanganController::class, 'post'])->name('ruangan.post');
+    Route::get('{id}/edit',[RuanganController::class, 'edit'])->name('ruangan.edit');
+    Route::patch('update/{id}',[RuanganController::class, 'update'])->name('ruangan.update');
+    Route::delete('/delete/{id}',[RuanganController::class, 'delete'])->name('ruangan.delete');
 });
 
 Route::group(['prefix'  => 'manajemen_barang/'],function(){

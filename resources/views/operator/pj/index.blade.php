@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('location','Dashboard')
 @section('location2')
-    <i class="fa fa-dashboard"></i>&nbsp;Transaksi Masuk
+    <i class="fa fa-dashboard"></i>&nbsp;Data Penanggung Jawab Ruangan
 @endsection
 @section('user-login','Operator')
 @section('sidebar-menu')
@@ -11,7 +11,7 @@
     <div class="callout callout-info ">
         <h4>Perhatian!</h4>
         <p>
-            Berikut adalah data transaksi masuk barang yang sudah tersedia, silahkan tambahkan jika ada transaksi masuk yang baru
+            Berikut adalah data penanggung jawab yang sudah tersedia, silahkan tambahkan jika ada data penanggung jawab baru
             <br>
         </p>
     </div>
@@ -19,9 +19,9 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><i class="fa fa-calendar"></i>&nbsp;Manajemen Data Transaksi Masuk</h3>
+                    <h3 class="box-title"><i class="fa fa-calendar"></i>&nbsp;Manajemen Data Penanggung Jawab Ruang</h3>
                     <div class="box-tools pull-right">
-                        <a href="{{ route('barang.transaksi_masuk.add') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp; Tambah Baru</a>
+                        <a href="{{ route('pj.add') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp; Tambah Baru</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -42,13 +42,8 @@
                         <thead class="bg-primary">
                             <tr>
                                 <th>No</th>
-                                <th>Kode Barang</th>
-                                <th>Nama Barang</th>
-                                <th>Sumber Dana</th>
-                                <th>Tahun Anggaran</th>
-                                <th>Jumlah Masuk</th>
-                                <th>Satuan</th>
-                                <th>Sumber Dana</th>
+                                <th>Nama Penanggung Jawab</th>
+                                <th>Email</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -56,25 +51,14 @@
                             @php
                                 $no=1;
                             @endphp
-                            @forelse ($transaksis as $transaksi)
+                            @forelse ($pjs as $pj)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $transaksi->kode_barang }}</td>
-                                <td>{{ $transaksi->nama_barang }}</td>
-                                <td>{{ $transaksi->sumber_dana }}</td>
-                                <td>{{ $transaksi->tahun_anggaran }}</td>
-                                <td>{{ $transaksi->jumlah_barang }}</td>
-                                <td>{{ $transaksi->satuan }}</td>
+                                <td>{{ $pj->nama_lengkap }}</td>
+                                <td>{{ $pj->email }}</td>
                                 <td>
-                                    @if ($transaksi->sumber_dana == "apbn")
-                                        Anggaran Pendapatan dan Belanja Negara (APBN)
-                                    @else
-                                        Penerima Negara Bukan Pajak (PNBP)
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('barang.transaksi_masuk.edit',[$transaksi->id]) }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
-                                    <form action="{{ route('barang.transaksi_masuk.delete',[$transaksi->id]) }}" method="POST">
+                                    <a href="{{ route('pj.edit',[$pj->id]) }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                                    <form action="{{ route('pj.delete',[$pj->id]) }}" method="POST">
                                         {{ csrf_field() }} {{ method_field('DELETE') }}
                                         <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Hapus</button>
                                     </form>
@@ -82,12 +66,11 @@
                             </tr>
                             @empty
                                 <tr>
-                                    <td colspan="11" class="text-center"><label class="text-danger">Data Transaksi Masuk Tidak Tersedia</label></td>
+                                    <td colspan="11" class="text-center"><label class="text-danger">Data Barang Tidak Tersedia</label></td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
-
                  </div>
             </div>
         </div>

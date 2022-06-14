@@ -4,6 +4,18 @@
         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
     </a>
 
+    <li class="{{ set_active('pj') }}">
+        <a href="{{ route('pj') }}">
+            <i class="fa fa-users"></i> <span>Data Penanggung Jawab</span>
+        </a>
+    </li>
+
+    <li class="{{ set_active('ruangan') }}">
+        <a href="{{ route('ruangan') }}">
+            <i class="fa fa-university"></i> <span>Data Ruangan</span>
+        </a>
+    </li>
+
     <li class="{{ set_active('barang') }}">
         <a href="{{ route('barang') }}">
             <i class="fa fa-save"></i> <span>Data Barang</span>

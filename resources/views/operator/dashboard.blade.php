@@ -20,7 +20,7 @@
         <h4>SELAMAT DATANG!</h4>
         <p>
             Sistem Informasi inventaris barang milik negara (BMN) adalah aplikasi yang digunakan untuk melakukan pencatatan
-            sirkulasi (keluar/masuk) barang di Fakultas Hukum (FH) Universitas Bengkulu
+            sirkulasi (keluar/masuk) barang di Lembaga Pengembangan Teknologi Informasi dan Komunikasi (LPTIK) Universitas Bengkulu
             <br>
             <b><i>Catatan:</i></b> Untuk keamanan, jangan lupa keluar setelah menggunakan aplikasi
         </p>
@@ -37,7 +37,6 @@
                 <div class="icon">
                     <i class="fa fa-users"></i>
                 </div>
-                <a href="" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-xs-6">
@@ -50,7 +49,6 @@
                 <div class="icon">
                     <i class="fa fa-user"></i>
                 </div>
-                <a href="" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-xs-6">
@@ -63,7 +61,6 @@
                 <div class="icon">
                     <i class="fa fa-book"></i>
                 </div>
-                <a href="" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-xs-6">
@@ -76,7 +73,6 @@
                 <div class="icon">
                     <i class="fa fa-key"></i>
                 </div>
-                <a href="" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
     </div>

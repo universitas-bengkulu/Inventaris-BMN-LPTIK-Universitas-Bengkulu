@@ -36,7 +36,7 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
+<body class="hold-transition skin-blue-light sidebar-mini fixed">
 <!-- Site wrapper -->
 <div class="wrapper">
 
@@ -66,7 +66,7 @@
                 <i class="fa fa-user"></i>
                 <span class="hidden-xs">
                   @if (Auth::check())
-                    {{ Auth::user()->name }}
+                    {{ Auth::user()->nama_lengkap }}
                 @endif
                 </span>
             </a>
@@ -102,7 +102,7 @@
         <div class="pull-left info">
           <p>
               @if (Auth::check())
-                  {{ Auth::user()->name }}
+                  {{ Auth::user()->nama_lengkap }}
               @endif
           </p>
           <a href="#"><i class="fa fa-circle text-success"></i>  @yield('user-login')</a>
@@ -125,7 +125,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Fakultas Hukum, Universitas Bengkulu
+        LPTIK Universitas Bengkulu
         <small>Sistem Informasi Inventaris Barang Milik Negara (BMN)</small>
       </h1>
       <ol class="breadcrumb">
@@ -148,7 +148,7 @@
     <div class="pull-right hidden-xs">
       <a href="" target="_blank"><b>Inventaris Barang Milik Negara (BMN)</b></a>
     </div>
-    <strong>Copyright &copy; 2019 <a href="">Fakultas Hukum</a>.</strong> All rights
+    <strong>Copyright &copy; 2022 <a href="">LPTIK Universitas Bengkulu</a>.</strong> All rights
     reserved.
   </footer>
 
