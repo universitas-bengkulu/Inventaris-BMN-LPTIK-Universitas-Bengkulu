@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>Inventaris BMN | @yield('location')</title>
+  <title>Inventaris Barang | @yield('location')</title>
   <link rel="shortcut icon" href="{{ asset('assets/images/koperasi.png') }}">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -46,7 +46,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><i class="fa fa-home"></i></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg" style="font-size:18px;"><b>Inventaris </b>BMN</span>
+      <span class="logo-lg" style="font-size:18px;"><b>Inventaris </b>Barang</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -125,11 +125,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        LPTIK Universitas Bengkulu
-        <small>Sistem Informasi Inventaris Barang Milik Negara (BMN)</small>
+        Desa Rindu Hati, Bengkulu Tengah
+        <small>Sistem Informasi Inventaris Barang Milik Desa</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-home"></i> Inventaris BMN</a></li>
+        <li><a href="#"><i class="fa fa-home"></i> Inventaris Barang</a></li>
         <li class="active">@yield('location2')</li>
       </ol>
     </section>
@@ -146,9 +146,9 @@
 
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <a href="" target="_blank"><b>Inventaris Barang Milik Negara (BMN)</b></a>
+      <a href="" target="_blank"><b>Inventaris Barang Milik Desa</b></a>
     </div>
-    <strong>Copyright &copy; 2022 <a href="">LPTIK Universitas Bengkulu</a>.</strong> All rights
+    <strong>Copyright &copy; 2022 <a href="">Desa RIndu Hati</a>.</strong> All rights
     reserved.
   </footer>
 

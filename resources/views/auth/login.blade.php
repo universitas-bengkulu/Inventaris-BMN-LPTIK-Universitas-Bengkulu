@@ -24,7 +24,7 @@
                     </div>
                     @else
                     <h6>Silahkan Login Disini</h6>
-                    <p style="text-align:center; margin-bottom:20px;">Aplikasi Inventaris BMN <br> (Barang Milik Negara) FH</p>
+                    <p style="text-align:center; margin-bottom:20px;">Aplikasi Inventaris Barang <br> Desa Wisata Rindu Hati</p>
                 @endif
                 <form method="post" action="{{ route('login') }}">
                     @csrf

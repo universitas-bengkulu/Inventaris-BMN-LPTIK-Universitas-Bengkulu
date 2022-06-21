@@ -19,8 +19,8 @@
     <div class="callout callout-info ">
         <h4>SELAMAT DATANG!</h4>
         <p>
-            Sistem Informasi inventaris barang milik negara (BMN) adalah aplikasi yang digunakan untuk melakukan pencatatan
-            sirkulasi (keluar/masuk) barang di Lembaga Pengembangan Teknologi Informasi dan Komunikasi (LPTIK) Universitas Bengkulu
+            Sistem Informasi inventaris barang milik desa adalah aplikasi yang digunakan untuk melakukan pencatatan
+            sirkulasi (keluar/masuk) barang di Desa Wisata Rindu Hati, Bengkulu Tengah
             <br>
             <b><i>Catatan:</i></b> Untuk keamanan, jangan lupa keluar setelah menggunakan aplikasi
         </p>
