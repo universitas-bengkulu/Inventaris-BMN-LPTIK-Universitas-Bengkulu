@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Education Priority</title>
+    <title>Pencatatan Aset Desa</title>
     <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/login/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/login/css/bootstrap.min.css') }}" />
