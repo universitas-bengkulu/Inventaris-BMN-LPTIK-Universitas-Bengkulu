@@ -1,77 +1,81 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-        <title>INVENTARIS | Login</title>
-        <link rel="icon" href="{{ asset('assets/images/logo.png') }}">
-        {{-- <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}"> --}}
-        <link href="{{ asset('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-        <link rel="stylesheet" href=" {{ asset('css/style_login.css') }} ">
-        <link href="{{ asset('assets/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
-	</head>
-	<body>
-		<div id="particles-js">
-            <div class="loginBox">
-                <img src=" {{ asset('assets/images/logo.png') }} " class="user">
-                @if ($errors->any())
-                    <div class="alert alert-danger alert-block" style="font-size:13px;">
-                        <ul style="margin-bottom: 0px !important">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Education Priority</title>
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}">
+    <link rel="stylesheet" href="{{ asset('assets/login/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/login/css/bootstrap.min.css') }}" />
+    <style>
+        .preloader {    position: fixed;    top: 0;    left: 0;    right: 0;    bottom: 0;    background-color: #ffffff;    z-index: 99999;    height: 100%;    width: 100%;    overflow: hidden !important;}.do-loader{    width: 200px;    height: 200px;    position: absolute;    left: 50%;    top: 50%;    margin: 0 auto;    -webkit-border-radius: 100%;       -moz-border-radius: 100%;         -o-border-radius: 100%;            border-radius: 100%;    background-image: url({{ asset('assets/images/logo.png') }});    background-size: 80% !important;    background-repeat: no-repeat;    background-position: center;    -webkit-background-size: cover;            background-size: cover;    -webkit-transform: translate(-50%,-50%);       -moz-transform: translate(-50%,-50%);        -ms-transform: translate(-50%,-50%);         -o-transform: translate(-50%,-50%);            transform: translate(-50%,-50%);}.do-loader:before {    content: "";    display: block;    position: absolute;    left: -6px;    top: -6px;    height: calc(100% + 12px);    width: calc(100% + 12px);    border-top: 1px solid #07A8D8;    border-left: 1px solid transparent;    border-bottom: 1px solid transparent;    border-right: 1px solid transparent;    border-radius: 100%;    -webkit-animation: spinning 0.750s infinite linear;       -moz-animation: spinning 0.750s infinite linear;         -o-animation: spinning 0.750s infinite linear;            animation: spinning 0.750s infinite linear;}@-webkit-keyframes spinning {   from {-webkit-transform: rotate(0deg);}   to {-webkit-transform: rotate(359deg);}}@-moz-keyframes spinning {   from {-moz-transform: rotate(0deg);}   to {-moz-transform: rotate(359deg);}}@-o-keyframes spinning {   from {-o-transform: rotate(0deg);}   to {-o-transform: rotate(359deg);}}@keyframes spinning {   from {transform: rotate(0deg);}   to {transform: rotate(359deg);}}
+    </style>
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="do-loader"></div>
+    </div>
+    <div class="d-flex align-items-center " style="height: 100vh">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 p-5 p-md-0">
+                    <img src="{{ asset('assets/images/logo.png') }}" height="100">
+                    <div class="mb-4">
+                        <h1>Silahkan Login Menggunakan Akun Anda</h1>
                     </div>
-                    @else
-                    <h6>Silahkan Login Disini</h6>
-                    <p style="text-align:center; margin-bottom:20px;">Aplikasi Inventaris Barang <br> Desa Wisata Rindu Hati</p>
-                @endif
-                <form method="post" action="{{ route('login') }}">
-                    @csrf
-                    <p>E-Mail</p>
-                    <input type="text" value="{{ old('email') }}" name="email" placeholder="masukan email">
-                    <p>Password</p>
-                    <input type="password" name="password" placeholder="••••••">
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success alert-block">
+                            {{ $message }}
+                        </div>
+                        @elseif ($message = Session::get('error'))
+                            <div class="alert alert-danger alert-block">
+                                {{ $message }}
+                            </div>
+                    @endif
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                id="email" placeholder="Email" value="{{ old('email') }}" autocomplete="email"
+                                autofocus />
+                            <div>
+                                @if ($errors->has('email'))
+                                    <small class="form-text text-danger">{{ $errors->first('email') }}</small>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">password</label>
+                            <input type="password" name="password"
+                                class="form-control @error('password') is-invalid @enderror" id="password"
+                                placeholder="Kata Sandi" autocomplete="current-password" />
+                            <div>
+                                @if ($errors->has('password'))
+                                    <small class="form-text text-danger">{{ $errors->first('password') }}</small>
+                                @endif
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">
+                            Login
+                        </button>
+                    </form>
+                </div>
 
-                    <button type="submit" name="submit" style="margin-bottom:10px;r"><i class="fa fa-sign-in"></i>&nbsp; Login</button>
-
-                    <a href="#" style="font-weight:100; font-size:12px" >Versi 1.0</a>
-                </form>
             </div>
         </div>
-    </body>
-    <script src="{{ asset('assets/vendors/jquery/dist/jquery.min.js') }}"></script>
-    <script type="text/javascript" src=" {{ asset('assets/particles/particles.min.js') }} "></script>
-    <script type="text/javascript" src=" {{ asset('assets/particles/app.js') }} "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-    {{-- <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
-    </script> --}}
+    </div>
+    <script src="{{ asset('assets/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script>
-
-      @if(Session::has('message'))
-        var type = "{{ Session::get('alert-type', 'info') }}";
-        switch(type){
-            case 'info':
-            toastr.options = {"closeButton": true,"debug": false,"progressBar": true,"positionClass": "toast-top-right","showDuration": "300","hideDuration": "1000","timeOut": "10000","extendedTimeOut": "1000","showEasing": "swing","hideEasing": "linear","showMethod": "fadeIn","hideMethod": "fadeOut"};
-                toastr.info("{{ Session::get('message') }}");
-                break;
-
-            case 'warning':
-            toastr.options = {"closeButton": true,"debug": false,"progressBar": true,"positionClass": "toast-top-right","showDuration": "300","hideDuration": "1000","timeOut": "10000","extendedTimeOut": "1000","showEasing": "swing","hideEasing": "linear","showMethod": "fadeIn","hideMethod": "fadeOut"};
-                toastr.warning("{{ Session::get('message') }}");
-                break;
-
-            case 'success':
-            toastr.options = {"closeButton": true,"progressBar": true,"positionClass": "toast-top-right","showDuration": "300","hideDuration": "1000","timeOut": "10000","showEasing": "swing","hideEasing": "linear","showMethod": "fadeIn","hideMethod": "fadeOut"};
-                toastr.success("{{ Session::get('message') }}");
-                break;
-
-            case 'error':
-            toastr.options = {"closeButton": true,"progressBar": true,"positionClass": "toast-top-right","showDuration": "300","hideDuration": "1000","timeOut": "10000","showEasing": "swing","hideEasing": "linear","showMethod": "fadeIn","hideMethod": "fadeOut"};
-                toastr.error("{{ Session::get('message') }}");
-                break;
-        }
-      @endif
+        $(window).on('load', function(){
+            // will first fade out the loading animation
+            jQuery(".status").fadeOut();
+            // will fade out the whole DIV that covers the website.
+            jQuery(".preloader").delay(0).fadeOut("slow");
+        });
     </script>
+</body>
+
 </html>
+

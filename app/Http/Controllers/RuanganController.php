@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ruangan;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,54 +14,52 @@ class RuanganController extends Controller
     }
 
     public function index(){
-        $pjs = User::select('id','nama_lengkap','email')
-                            ->where('akses','pj')
+        $ruangans = Ruangan::join('users','users.id','ruangans.penanggung_jawab_id')->select('ruangans.id','nama_lengkap','nama_ruangan')
                             ->orderBy('id','desc')
                             ->get();
-        return view('operator/pj/index',compact('pjs'));
+        return view('operator/ruangan/index',compact('ruangans'));
     }
 
     public function add(){
-        return view('operator/pj.add');
+        $pjs = User::where('akses','pj')->get();
+        return view('operator/ruangan.add',compact('pjs'));
     }
 
     public function post(Request $request){
         $this->validate($request,[
-            'nama_lengkap'   =>  'required',
-            'email'  =>  'required',
-            'password'  =>  'required',
+            'nama_ruangan'   =>  'required',
+            'penanggung_jawab_id'  =>  'required',
         ]);
-        $pj = new User;
-        $pj->nama_lengkap = $request->nama_lengkap;
-        $pj->email = $request->email;
-        $pj->password = $request->password;
-        $pj->akses = 'pj';
-        $pj->save();
+        $ruangan = new Ruangan;
+        $ruangan->nama_ruangan = $request->nama_ruangan;
+        $ruangan->penanggung_jawab_id = $request->penanggung_jawab_id;
+        $ruangan->save();
 
-        return redirect()->route('pj')->with(['success' => 'Data penanggung jawab sudah ditambahkan !']);
+        return redirect()->route('ruangan')->with(['success' => 'Data ruangan sudah ditambahkan !']);
 
     }
     public function edit($id){
-        $pj = User::where('id',$id)->first();
-        return view('operator/pj/.edit',compact('pj'));
+        $ruangan = Ruangan::where('id', $id)->first();
+        $pjs = User::where('akses','pj')->get();
+        return view('operator/ruangan/.edit',compact('ruangan','pjs'));
     }
 
     public function update(Request $request, $id){
         $this->validate($request,[
-            'nama_lengkap'   =>  'required',
-            'email'  =>  'required',
+            'nama_ruangan'   =>  'required',
+            'penanggung_jawab_id'  =>  'required',
         ]);
 
-        User::where('id',$id)->update([
-            'nama_lengkap'   =>  $request->nama_lengkap,
-            'email'  =>  $request->email,
+        Ruangan::where('id',$id)->update([
+            'nama_ruangan'   =>  $request->nama_ruangan,
+            'penanggung_jawab_id'  =>  $request->penanggung_jawab_id,
         ]);
 
-        return redirect()->route('pj')->with(['success' => 'Data penanggung jawab berhasil diubah !']);
+        return redirect()->route('ruangan')->with(['success' => 'Data ruangan berhasil diubah !']);
 
     }
     public function delete($id){
-        User::where('id',$id)->delete();
-        return redirect()->route('pj')->with(['success' => 'Data penanggung jawab berhasil diubah !']);
+        Ruangan::where('id',$id)->delete();
+        return redirect()->route('ruangan')->with(['success' => 'Data ruangan berhasil dihapus !']);
     }
 }

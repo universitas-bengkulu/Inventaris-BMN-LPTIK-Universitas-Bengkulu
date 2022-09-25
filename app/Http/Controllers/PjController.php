@@ -28,12 +28,11 @@ class PjController extends Controller
         $this->validate($request,[
             'nama_lengkap'   =>  'required',
             'email'  =>  'required',
-            'password'  =>  'required',
         ]);
         $pj = new User;
         $pj->nama_lengkap = $request->nama_lengkap;
         $pj->email = $request->email;
-        $pj->password = $request->password;
+        $pj->password = bcrypt("password");
         $pj->akses = 'pj';
         $pj->save();
 
