@@ -42,11 +42,8 @@
                         <thead class="bg-primary">
                             <tr>
                                 <th>No</th>
-                                <th>Tanggal Pinjam</th>
-                                <th>Kode Barang</th>
-                                <th>Nama Barang</th>
-                                <th>Jumlah Pinjam</th>
                                 <th>Nama Peminjam</th>
+                                <th>Tanggal Pinjam</th>
                                 <th>Tanggal Kembali</th>
                                 <th>Keterangan</th>
                                 <th>Aksi</th>
@@ -59,19 +56,9 @@
                             @forelse ($transaksis as $transaksi)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $transaksi->tanggal_pinjam }}</td>
-                                <td>{{ $transaksi->kode_barang }}</td>
-                                <td>{{ $transaksi->nama_barang }}</td>
-                                <td>{{ $transaksi->jumlah_pinjam }}</td>
                                 <td>{{ $transaksi->nama_peminjam }}</td>
+                                <td>{{ $transaksi->tanggal_pinjam }}</td>
                                 <td>{{ $transaksi->tanggal_kembali }} </td>
-                                <td>
-                                    @if ($transaksi->keterangan == "sedang_dipinjam")
-                                        <label class="text-warning"><i class="fa fa-clock-o"></i>&nbsp; Sedang Dipinjam</label>
-                                    @else
-                                        <label class="text-success"><i class="fa fa-check-circle"></i>&nbsp; Sudah Dikembalikan</label>
-                                    @endif
-                                </td>
                                 <td>
                                     <form action="{{ route('barang.peminjaman.update',[$transaksi->id]) }}" method="POST">
                                         {{ csrf_field() }} {{ method_field('PATCH') }}
@@ -81,6 +68,9 @@
                                         <br>
                                         <button class="btn btn-success btn-sm" {{ $transaksi->keterangan == "sudah_dikembalikan" ? 'disabled' : '' }}><i class="fa fa-spinner fa-spin"></i>&nbsp; Proses</button>
                                     </form>
+                                </td>
+                                <td>
+                                    <a href="{{ route('pinjam_detail',[$transaksi->id]) }}" class="btn btn-primary btn-sm">Detail</a>
                                 </td>
                             </tr>
                             @empty

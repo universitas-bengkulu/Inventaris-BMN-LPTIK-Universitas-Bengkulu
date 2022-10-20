@@ -86,6 +86,10 @@ Route::group(['prefix'  => 'transaksi_peminjaman/'],function(){
     Route::patch('{id}/update/',[PeminjamanController::class, 'update'])->name('barang.peminjaman.update');
     Route::delete('/{id}/delete/',[PeminjamanController::class, 'delete'])->name('barang.peminjaman.delete');
     Route::get('/cari_barang',[PeminjamanController::class, 'cariBarang'])->name('barang.peminjaman.cari_barang');
+    Route::get('/tambah_cart/{id}',[PeminjamanController::class, 'tambahCart'])->where('id','[0-9]+')->name('tambah_cart');
+    Route::get('/hapus_cart/{id}',[PeminjamanController::class, 'hapusCart'])->where('id','[0-9]+')->name('hapus_cart');
+    Route::post('/pinjam/',[PeminjamanController::class, 'pinjam'])->where('id','[0-9]+')->name('pinjam');
+    Route::get('/pinjam_detail/{id}',[PeminjamanController::class, 'detail'])->where('id','[0-9]+')->name('pinjam_detail');
 });
 
 Route::group(['prefix'  => 'laporan/'],function(){

@@ -74,6 +74,22 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="exampleInputEmail1">Ruangan</label>
+                                <select name="ruang_id" class="form-control" id="">
+                                    <option disabled  selected>-- pilih ruangan --</option>
+                                    @foreach ($ruangans as $ruangan)
+                                        <option value="{{ $ruangan->id }}">{{ $ruangan->nama_ruangan }}</option>
+                                    @endforeach
+                                </select>
+                                <div>
+                                    @if ($errors->has('ruang_id'))
+                                        <small class="form-text text-danger">{{ $errors->first('ruang_id') }}</small>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group col-md-6">
                                 <label for="exampleInputEmail1">Satuan</label>
                                 <select name="satuan" class="form-control" id="bulan">

@@ -65,20 +65,20 @@
                             @forelse ($barangs as $barang)
                             @php
                                 $keluar = TransaksiKeluar::where('barang_id',$barang->id)->select(DB::raw('sum(jumlah_keluar) as jumlah_keluar'))->first();
-                                $peminjaman = Peminjaman::where('barang_id',$barang->id)->where('keterangan','sedang_dipinjam')->select(DB::raw('sum(jumlah_pinjam) as jumlah_pinjam'))->first();
+                                // $peminjaman = Peminjaman::where('barang_id',$barang->id)->where('keterangan','sedang_dipinjam')->select(DB::raw('sum(jumlah_pinjam) as jumlah_pinjam'))->first();
                                 if ($keluar->jumlah_keluar == null) {
                                     $jumlah_keluar = 0;
                                 }else {
                                     $jumlah_keluar = $keluar->jumlah_keluar;
                                 }
 
-                                if ($peminjaman->jumlah_pinjam == null){
-                                    $jumlah_pinjam = 0;
-                                }else {
-                                    $jumlah_pinjam = $peminjaman->jumlah_pinjam;
+                                // if ($peminjaman->jumlah_pinjam == null){
+                                //     $jumlah_pinjam = 0;
+                                // }else {
+                                //     $jumlah_pinjam = $peminjaman->jumlah_pinjam;
 
-                                }
-                                $minus = $keluar->jumlah_keluar + $jumlah_pinjam;
+                                // }
+                                // $minus = $keluar->jumlah_keluar + $jumlah_pinjam;
                             @endphp
                             <tr>
                                 <td>{{ $no++ }}</td>
@@ -93,7 +93,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{ $barang->jumlah_barang - $minus }}
+                                    {{-- {{ $barang->jumlah_barang - $minus }} --}}
                                 </td>
                                 <td>{{ $barang->satuan }}</td>
                                 <td>{{ $barang->tahun_anggaran }}</td>

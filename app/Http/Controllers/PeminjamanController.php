@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Peminjaman;
+use App\Models\PeminjamanDetail;
 use App\Models\TransaksiKeluar;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,16 +19,16 @@ class PeminjamanController extends Controller
     }
 
     public function index(){
-        $transaksis = Peminjaman::join('barangs','barangs.id','peminjamen.barang_id')
-                            ->select('peminjamen.id','tanggal_pinjam','tanggal_kembali','kode_barang','nama_barang','jumlah_pinjam','nama_peminjam','keterangan')
-                            ->orderBy('peminjamen.id','desc')
+        $transaksis = Peminjaman::orderBy('peminjamen.id','desc')
                             ->get();
+        session()->forget('cart');
         return view('operator/peminjaman/index',compact('transaksis'));
     }
 
     public function add(){
         $barangs = Barang::all();
-        return view('operator/peminjaman.add',compact('barangs'));
+        $cart = session('cart');
+        return view('operator/peminjaman.add',compact('barangs','cart'));
     }
 
     public function post(Request $request){
@@ -88,7 +89,60 @@ class PeminjamanController extends Controller
     }
 
     public function cariBarang(Request $request){
-        $barang = Barang::where('id',$request->barang_id)->first();
+        $barang = Barang::where('kode_barang','like','%"'.$request->kode_barang.'"%')->first();
         return $barang;
+    }
+
+    public function tambahCart($id){
+        $cart = session('cart');
+        $barang = Barang::where('id',$id)->first();
+        $cart[$id] = [
+            'barang_id'     => $barang->id,
+            'kode_barang'   => $barang->kode_barang,
+            'nama_barang'   => $barang->nama_barang,
+            'merk'   => $barang->merk,
+            'jumlah' => 1,
+        ];
+
+        session(['cart' =>  $cart]);
+        return redirect('/transaksi_peminjaman/add');
+    }
+
+    public function hapusCart($id){
+        $cart = session('cart');
+        unset($cart[$id]);
+        session(['cart' => $cart]);
+        return redirect('/transaksi_peminjaman/add');
+    }
+
+    public function pinjam(Request $request){
+        $cart = session('cart');
+        if (empty($cart)) {
+            return redirect()->back()->with(['error'    => 'silahkan tambahkan barang ke keranjang']);
+        }
+        $this->validate($request,[
+            'tanggal_pinjam' =>  'required',
+            'tanggal_kembali'    =>  'required',
+            'nama_peminjam'  =>  'required',
+        ]);
+        $peminjaman = Peminjaman::create([
+            'tanggal_pinjam'    =>  $request->tanggal_pinjam,
+            'tanggal_kembali'    =>  $request->tanggal_kembali,
+            'nama_peminjam'    =>  $request->nama_peminjam,
+        ]);
+
+        foreach ($cart as $key => $a) {
+            PeminjamanDetail::create([
+                'peminjaman_id' =>$peminjaman->id,
+                'barang_id' =>  $a['barang_id'],
+                'jumlah' =>  $a['jumlah'],
+            ]);
+        }
+        return redirect()->route('barang.peminjaman')->with(['success' => 'Transaksi peminjaman berhasil !']);
+    }
+
+    public function detail($id){
+        $data = Peminjaman::where('id',$id)->first();
+        return view('operator/peminjaman.detail',compact('data'));
     }
 }

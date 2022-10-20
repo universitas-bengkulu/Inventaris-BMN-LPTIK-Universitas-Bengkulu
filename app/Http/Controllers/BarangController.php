@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Peminjaman;
+use App\Models\Ruangan;
 use App\Models\TransaksiKeluar;
 use App\Models\TransaksiMasuk;
 use Illuminate\Http\Request;
@@ -38,12 +39,14 @@ class BarangController extends Controller
     }
 
     public function add(){
-        return view('operator/barang.add');
+        $ruangans = Ruangan::all();
+        return view('operator/barang.add',compact('ruangans'));
     }
 
     public function post(Request $request){
         $this->validate($request,[
             'nama_barang'   =>  'required',
+            'ruang_id'   =>  'required',
             'merk'  =>  'required',
             'kategori'  =>  'required',
             'jumlah_barang' =>  'required',
@@ -58,6 +61,7 @@ class BarangController extends Controller
         $barang = new Barang;
         $barang->kode_barang = $kode_barang;
         $barang->nama_barang = $request->nama_barang;
+        $barang->ruang_id = $request->ruang_id;
         $barang->merk = $request->merk;
         $barang->kategori = $request->kategori;
         $barang->jumlah_barang = $request->jumlah_barang;
@@ -79,6 +83,7 @@ class BarangController extends Controller
     public function update(Request $request, $id){
         $this->validate($request,[
             'nama_barang'   =>  'required',
+            'ruang_id'   =>  'required',
             'merk'  =>  'required',
             'kategori'  =>  'required',
             'jumlah_barang' =>  'required',
@@ -91,6 +96,7 @@ class BarangController extends Controller
 
         Barang::where('id',$id)->update([
             'nama_barang'   =>  $request->nama_barang,
+            'ruang_id'   =>  $request->ruang_id,
             'merk'  =>  $request->merk,
             'kategori'  =>  $request->kategori,
             'jumlah_barang' =>  $request->jumlah_barang,

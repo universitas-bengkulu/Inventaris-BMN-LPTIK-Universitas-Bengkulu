@@ -27,7 +27,6 @@ class CreateBarangsTable extends Migration
             $table->string('asalPerolehan');
             $table->enum('sumber_dana',['apbn','pnpb']);
             $table->enum('kondisi',['baik','rusak','sedang_dipinjam','hilang']);
-            $table->string('foto')->nullable();
             $table->bigInteger('harga');
             $table->text('catatan');
             $table->date('tanggal_masuk');
